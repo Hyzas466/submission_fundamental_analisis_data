@@ -82,7 +82,7 @@ submission/
 ├── notebook.ipynb         # sudah dieksekusi
 ├── requirements.txt
 ├── README.md
-└── url.txt                # status deployment; ganti dengan URL setelah terverifikasi
+└── url.txt                # URL dashboard Streamlit Cloud
 ```
 
 `main_data.csv`: `pm25_observed_mean` adalah rata-rata jam yang tersedia;
@@ -94,9 +94,13 @@ Slider dashboard menghitung ulang kelayakan memakai `valid_hours` dan rata-rata 
 
 ## Deploy ke Streamlit Community Cloud
 
-**Status per 19 Oktober 2026:** proyek sudah diunggah ke GitHub pada branch `main`.
-Deployment Cloud menunggu login pengguna; belum ada URL aplikasi publik yang terverifikasi.
-Isi `url.txt` saat aplikasi benar-benar berhasil dibuka.
+**Status per 19 Oktober 2026:** deployment berhasil dan dashboard sudah diuji melalui browser.
+Buka [dashboard Streamlit Cloud](https://submissionfundamentalana-2tv3vdrhzpu43ywnjev5ma.streamlit.app/).
+Sumber deployment adalah repo `Hyzas466/submission_fundamental_analisis_data`, branch
+`main`, main file `dashboard/dashboard.py`, runtime Python 3.13.
+URL publik juga tercantum dalam `url.txt`.
+
+Untuk membuat deployment ulang:
 
 1. Isi folder `submission` sudah tersedia pada root repositori
    `Hyzas466/submission_fundamental_analisis_data`, termasuk `requirements.txt`

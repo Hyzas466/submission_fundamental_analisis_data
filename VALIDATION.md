@@ -10,5 +10,9 @@
 - Dashboard dijalankan lokal dan tampil pada browser.
 - Pembaruan 19 Oktober 2026: proyek berhasil diunggah ke repo
   `Hyzas466/submission_fundamental_analisis_data`, branch `main`.
-- Deployment publik belum diverifikasi karena masih memerlukan login Streamlit Cloud.
+- Deployment Streamlit Cloud berhasil pada 19 Oktober 2026 dengan runtime Python 3.13.
+- Dashboard cloud menampilkan 12 stasiun, 17.164 hari valid, dan cakupan 97,9% pada ambang 18 jam.
+- Tab kelompok konsentrasi dan filter kelengkapan diuji melalui browser cloud;
+  ambang 24 jam menghasilkan 15.144 stasiun-hari valid dan cakupan 86,4%.
+- URL publik terverifikasi: https://submissionfundamentalana-2tv3vdrhzpu43ywnjev5ma.streamlit.app/
 - Nama, email, serta ID Dicoding masih perlu diisi pengguna.
