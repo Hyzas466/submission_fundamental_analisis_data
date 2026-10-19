@@ -8,5 +8,7 @@
 - Streamlit AppTest: tampilan awal, satu stasiun, ambang 24 jam, pilihan stasiun kosong,
   tanggal belum lengkap, hari tanpa data valid, dan rentang satu hari lulus tanpa exception.
 - Dashboard dijalankan lokal dan tampil pada browser.
-- Deployment publik belum diverifikasi karena memerlukan login Streamlit Cloud dan repo GitHub tujuan.
+- Pembaruan 19 Oktober 2026: proyek berhasil diunggah ke repo
+  `Hyzas466/submission_fundamental_analisis_data`, branch `main`.
+- Deployment publik belum diverifikasi karena masih memerlukan login Streamlit Cloud.
 - Nama, email, serta ID Dicoding masih perlu diisi pengguna.

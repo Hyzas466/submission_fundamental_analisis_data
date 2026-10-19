@@ -4,6 +4,8 @@ Analisis PM2.5 pada 12 stasiun Beijing, 1 Maret 2013–28 Februari 2017.
 Notebook mengikuti urutan templat proyek dan memuat hasil eksekusi, dokumentasi,
 insight setiap tahap, dua pertanyaan SMART, tiga visualisasi, kesimpulan, dan rekomendasi.
 
+Repositori proyek: [Hyzas466/submission_fundamental_analisis_data](https://github.com/Hyzas466/submission_fundamental_analisis_data), branch `main`.
+
 ## Menjalankan dashboard
 
 Gunakan Python **3.13** (versi yang dipakai dalam pengujian). Buka terminal di folder ini:
@@ -92,11 +94,13 @@ Slider dashboard menghitung ulang kelayakan memakai `valid_hours` dan rata-rata 
 
 ## Deploy ke Streamlit Community Cloud
 
-**Status: belum dideploy.** Halaman Cloud memerlukan login pengguna; belum ada URL aplikasi
-publik yang terverifikasi. Isi `url.txt` saat aplikasi benar-benar berhasil dibuka.
+**Status per 19 Oktober 2026:** proyek sudah diunggah ke GitHub pada branch `main`.
+Deployment Cloud menunggu login pengguna; belum ada URL aplikasi publik yang terverifikasi.
+Isi `url.txt` saat aplikasi benar-benar berhasil dibuka.
 
-1. Unggah isi folder `submission` ke repositori GitHub Anda. Hindari mengunggah `.venv`,
-   cache, kredensial, dan ZIP. Sertakan `requirements.txt` serta `dashboard/main_data.csv`.
+1. Isi folder `submission` sudah tersedia pada root repositori
+   `Hyzas466/submission_fundamental_analisis_data`, termasuk `requirements.txt`
+   serta `dashboard/main_data.csv`.
 2. Masuk ke [Streamlit Community Cloud](https://share.streamlit.io/).
 3. Pilih **Create app**, repositori dan branch yang sesuai, lalu main file
    **`dashboard/dashboard.py`**. Pilih Python **3.13** pada pengaturan deployment.
