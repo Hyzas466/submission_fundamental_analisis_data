@@ -1,0 +1,2 @@
+BELUM DEPLOY — belum ada URL publik Streamlit Cloud yang terverifikasi.
+Setelah deployment berhasil, ganti seluruh isi berkas ini dengan URL aplikasi https://....streamlit.app.
