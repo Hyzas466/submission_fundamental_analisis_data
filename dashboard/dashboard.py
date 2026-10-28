@@ -10,6 +10,12 @@ plt.rcParams.update({'font.size': 10, 'axes.spines.top': False, 'axes.spines.rig
 LABELS = ['0–25', '>25–50', '>50–100', '>100–150', '>150']
 COLORS = ['#d9e8f5', '#9ac3df', '#5097c2', '#25618f', '#123b5d']
 MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des']
+Q1 = ('Selama 1 Maret 2013–28 Februari 2017, tiga stasiun mana yang memiliki '
+      'rata-rata PM2.5 harian tertinggi, berapa nilai rata-rata dan persentase hari '
+      'validnya, sebagai dasar penentuan prioritas audit pemantauan kualitas udara?')
+Q2 = ('Selama 1 Maret 2013–28 Februari 2017, bulan kalender apa yang memiliki '
+      'rata-rata PM2.5 tertinggi dan terendah, serta berapa selisihnya, sebagai '
+      'dasar penjadwalan peningkatan pemantauan kualitas udara?')
 
 @st.cache_data
 def load_data():
@@ -25,6 +31,11 @@ st.caption('BEIJING / AIR QUALITY OBSERVATORY')
 st.title('Memahami pola kualitas udara')
 st.write('Jelajahi perbedaan PM2.5 antarlokasi dan pola bulanan dari 12 stasiun pengamatan.')
 st.caption('Data historis: 1 Maret 2013–28 Februari 2017 · Satuan: µg/m³ · Bukan pemantauan langsung')
+with st.expander('Pertanyaan bisnis dan tujuan analisis'):
+    st.markdown(f'**Pertanyaan 1 — prioritas lokasi**\n\n{Q1}')
+    st.markdown(f'**Pertanyaan 2 — prioritas waktu**\n\n{Q2}')
+    st.caption('Rumusan sama dengan notebook. Tampilan awal menjawab periode penelitian lengkap; '
+               'filter di sidebar memungkinkan eksplorasi bagian periode dan stasiun yang dipilih.')
 
 with st.sidebar:
     st.header('Lingkup analisis')
@@ -67,27 +78,31 @@ tab1, tab2, tab3 = st.tabs(['Lokasi & waktu', 'Kelompok konsentrasi', 'Kualitas 
 with tab1:
     col1,col2 = st.columns([1,1])
     with col1:
-        st.subheader('Di mana konsentrasi lebih tinggi?')
+        st.subheader('Pertanyaan 1 · Prioritas lokasi')
         plot = summary.dropna(subset=['mean_pm25']).sort_values('mean_pm25')
         fig, ax = plt.subplots(figsize=(7,5.5))
         bars=ax.barh(plot.index,plot.mean_pm25,color=['#147d92' if s in summary.head(3).index else '#a7bdc7' for s in plot.index])
         ax.bar_label(bars,fmt='%.1f',padding=3)
-        ax.set(xlabel='Rata-rata PM2.5 harian (µg/m³)', xlim=(0,max(1,plot.mean_pm25.max()*1.2)))
+        ax.set(xlabel='Rata-rata PM2.5 harian (µg/m³)', xlim=(0,max(1,plot.mean_pm25.max()*1.2)),
+               title=f'Rata-rata PM2.5 per stasiun\n{start:%d-%m-%Y} – {end:%d-%m-%Y}')
         ax.grid(axis='x',alpha=.15)
         ax.set_axisbelow(True)
         show_figure(fig)
         top=summary.dropna(subset=['mean_pm25']).head(3)
-        st.write('Prioritas audit dalam filter: '+', '.join(top.index)+'.')
+        st.write('Prioritas audit dalam filter: '+ '; '.join(
+            f'{station}: {row.mean_pm25:.2f} µg/m³, cakupan {row.coverage:.2f}%'
+            for station,row in top.iterrows()) + '.')
         st.caption('Batang mulai dari nol. Warna aksen menandai maksimal tiga nilai tertinggi, bukan tingkat bahaya.')
     with col2:
-        st.subheader('Bagaimana pola bulanannya?')
+        st.subheader('Pertanyaan 2 · Prioritas waktu')
         station_month = valid.groupby(['station','year','month'],as_index=False).agg(pm25=('pm25','mean'))
         year_month=station_month.groupby(['year','month'],as_index=False).agg(pm25=('pm25','mean'),stations=('pm25','count'))
         month=year_month.groupby('month').agg(mean=('pm25','mean'),low=('pm25','min'),high=('pm25','max'),years=('pm25','count')).reindex(range(1,13))
         fig,ax=plt.subplots(figsize=(7,5.5))
         ax.fill_between(month.index,month.low,month.high,color='#d8e9ee',label='Rentang antar-tahun')
         ax.plot(month.index,month['mean'],marker='o',color='#147d92',linewidth=2,label='Rata-rata')
-        ax.set(xticks=range(1,13),xticklabels=MONTHS,ylim=(0,None),ylabel='PM2.5 (µg/m³)',xlabel='Bulan kalender')
+        ax.set(xticks=range(1,13),xticklabels=MONTHS,ylim=(0,None),ylabel='PM2.5 (µg/m³)',xlabel='Bulan kalender',
+               title=f'Rata-rata PM2.5 menurut bulan kalender\n{start:%d-%m-%Y} – {end:%d-%m-%Y}')
         ax.tick_params(axis='x',labelsize=8)
         ax.grid(axis='y',alpha=.15)
         ax.legend(fontsize=9)
@@ -95,7 +110,8 @@ with tab1:
         peak=int(month['mean'].idxmax())
         low=int(month['mean'].idxmin())
         st.write(f'Rata-rata tertinggi: {MONTHS[peak-1]} ({month.loc[peak,"mean"]:.1f} µg/m³); '
-                 f'terendah: {MONTHS[low-1]} ({month.loc[low,"mean"]:.1f} µg/m³).')
+                 f'terendah: {MONTHS[low-1]} ({month.loc[low,"mean"]:.1f} µg/m³); '
+                 f'selisih: {month.loc[peak,"mean"]-month.loc[low,"mean"]:.2f} µg/m³.')
         st.caption('Bobot stasiun lalu tahun setara. Rentang bukan interval kepercayaan. '
                    'Bulan tanpa data berupa celah; filter tanggal dapat mencakup bulan parsial.')
     st.subheader('Dasar perbandingan stasiun')

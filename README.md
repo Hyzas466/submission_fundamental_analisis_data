@@ -45,10 +45,14 @@ sebelum mengirim submission. Identitas tidak diisi secara asumsi.
 
 ## Pertanyaan dan metode
 
-1. Stasiun mana memiliki rata-rata PM2.5 harian tertinggi pada periode penelitian,
-   untuk memprioritaskan audit pemantauan?
-2. Bulan kalender mana memiliki rata-rata tertinggi/terendah dan berapa selisihnya,
-   untuk menjadwalkan pemantauan tambahan?
+1. Selama 1 Maret 2013–28 Februari 2017, tiga stasiun mana yang memiliki rata-rata PM2.5 harian tertinggi, berapa nilai rata-rata dan persentase hari validnya, sebagai dasar penentuan prioritas audit pemantauan kualitas udara?
+2. Selama 1 Maret 2013–28 Februari 2017, bulan kalender apa yang memiliki rata-rata PM2.5 tertinggi dan terendah, serta berapa selisihnya, sebagai dasar penjadwalan peningkatan pemantauan kualitas udara?
+
+Rumusan ini diulang secara utuh pada EDA, visualisasi, dan kesimpulan notebook,
+serta ditampilkan di dashboard. Pertanyaan 1 dijawab grafik batang dan tabel nilai
+serta cakupan hari valid; pertanyaan 2 dijawab grafik garis dan nilai ekstrem serta selisih.
+**ID Dicoding adalah username akun Dicoding pada profil Anda**, bukan ID peserta
+program mitra seperti ASAH. Verifikasi username sebelum mengirim ulang submission.
 
 - Hari valid: sedikitnya **18 dari 24** pengamatan PM2.5. Ini aturan analitis proyek.
 - Nilai kosong tidak diisi nol atau diinterpolasi. Outlier IQR ditandai dan dipertahankan.
